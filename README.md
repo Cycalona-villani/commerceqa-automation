@@ -1,6 +1,8 @@
 # CommerceQA Automation
 
-**E-Commerce QA Automation Framework | Playwright | TypeScript | React**
+
+[![CommerceQA Playwright Tests](https://github.com/Cycalona-villani/commerceqa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Cycalona-villani/commerceqa-automation/actions/workflows/playwright.yml)
+
 
 CommerceQA Automation is a hands-on quality engineering portfolio project focused on building and maintaining automated tests for e-commerce shopping cart and checkout workflows.
 
@@ -154,19 +156,25 @@ Testing priorities include:
 - [x] Confirm all four scenarios pass across three browsers
 
 ### Phase 2: Checkout Automation
-- [ ] Implement checkout form
-- [ ] Validate customer information
-- [ ] Automate successful checkout
-- [ ] Test invalid checkout data
-- [ ] Simulate payment acceptance and rejection
+- [x] Implement checkout form
+- [x] Validate required customer information
+- [x] Automate successful checkout
+- [x] Test required-field validation
+- [x] Simulate payment acceptance and rejection
+- [x] Automate approved and declined payment scenarios
+- [x] Confirm 21 cart and checkout browser tests pass
 
 ### Phase 3: Advanced Test Framework
+- [x] Implement reusable CartPage and CheckoutPage objects
+- [x] Configure GitHub Actions CI
+- [x] Automatically run Playwright regression tests
+- [x] Build React application in CI
+- [x] Publish automated test reports as workflow artifacts
 - [ ] Expand Page Object Model
 - [ ] Introduce reusable fixtures
 - [ ] Add API tests
 - [ ] Implement test data management
 - [ ] Add negative and boundary testing
-- [ ] Configure GitHub Actions CI
 - [ ] Document test execution and defects
 
 ### Phase 4: Professional QA Practices
