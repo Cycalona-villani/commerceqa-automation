@@ -27,33 +27,33 @@ test.describe('Shopping Cart Tests', () => {
         await cartPage.expectCartTotal(119.98)
     })
 
-    
-test('CART-003: Update product quantity', async () => {
-  await cartPage.addProduct('Wireless Headphones')
 
-  // Change quantity from 1 to 2
-  await cartPage.updateProductQuantity('Wireless Headphones', 2)
+    test('CART-003: Update product quantity', async () => {
+        await cartPage.addProduct('Wireless Headphones')
 
-  // Verify quantity and total
-  await cartPage.expectCartCount(2)
-  await cartPage.expectCartTotal(159.98)
-})
+        // Change quantity from 1 to 2
+        await cartPage.updateProductQuantity('Wireless Headphones', 2)
 
-test('CART-004: Remove product from cart', async ({ page }) => {
-  await cartPage.addProduct('Wireless Headphones')
+        // Verify quantity and total
+        await cartPage.expectCartCount(2)
+        await cartPage.expectCartTotal(159.98)
+    })
 
-  await cartPage.expectCartCount(1)
+    test('CART-004: Remove product from cart', async ({ page }) => {
+        await cartPage.addProduct('Wireless Headphones')
 
-  // Remove the product
-  await cartPage.removeProduct()
+        await cartPage.expectCartCount(1)
 
-  // Verify cart is empty
-  await cartPage.expectCartCount(0)
-  await cartPage.expectCartTotal(0)
+        // Remove the product
+        await cartPage.removeProduct()
 
-  await expect(
-    page.getByText('Your cart is empty.')
-  ).toBeVisible()
-})
+        // Verify cart is empty
+        await cartPage.expectCartCount(0)
+        await cartPage.expectCartTotal(0)
+
+        await expect(
+            page.getByText('Your cart is empty.')
+        ).toBeVisible()
+    })
 
 })

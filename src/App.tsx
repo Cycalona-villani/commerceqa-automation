@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import Checkout from './components/Checkout'
 import './App.css'
 
 const products = [
@@ -14,6 +15,7 @@ type CartItem = Product & { quantity: number }
 
 function App() {
   const [cart, setCart] = useState<CartItem[]>([])
+  const [orderComplete, setOrderComplete] = useState(false)
 
   function addToCart(product: Product) {
     setCart(current => {
@@ -113,6 +115,21 @@ function App() {
           Total: ${total.toFixed(2)}
         </h3>
       </section>
+      {cart.length > 0 && !orderComplete && (
+        <Checkout
+          total={total}
+          onOrderComplete={() => {
+            setCart([])
+            setOrderComplete(true)
+          }}
+        />
+      )}
+
+      {orderComplete && (
+        <div role="status" data-testid="order-confirmation">
+          Order placed successfully!
+        </div>
+      )}
     </main>
   )
 }
