@@ -34,10 +34,11 @@ jobs:
       - name: Run CommerceQA regression tests
         run: npx playwright test tests/cart.spec.ts tests/checkout.spec.ts
 
+      
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: commerceqa-playwright-report
           path: playwright-report/
-          retention-days
+          retention-days: 30
