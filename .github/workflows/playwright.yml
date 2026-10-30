@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Run CommerceQA regression tests
-        run: npx playwright test tests/cart.spec.ts tests/checkout.spec.ts tests/products-api.spec.ts
+        run: npx playwright test tests/cart.spec.ts tests/checkout.spec.ts tests/products-api.spec.ts tests/orders-api.spec.ts
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
