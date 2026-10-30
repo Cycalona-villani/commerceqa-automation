@@ -58,7 +58,16 @@ function App() {
   return (
     <main className="store">
       <header className="store-header">
-        <h1>CommerceQA Store</h1>
+       
+<div className="store-brand">
+  <img
+    src="/assets/commerceqa.svg"
+    alt="CommerceQA logo"
+    className="store-logo"
+  />
+  <h1>CommerceQA Store</h1>
+</div>
+
         <p>E-Commerce Testing Demo</p>
         <span data-testid="cart-count">
           Cart: {itemCount} items

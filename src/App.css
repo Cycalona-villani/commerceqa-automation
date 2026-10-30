@@ -77,3 +77,20 @@ button:hover {
   background: #8f1b12;
 }
 
+
+.store-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.store-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.store-brand h1 {
+  margin: 0;
+}
+
