@@ -1,4 +1,3 @@
-
 name: CommerceQA Playwright Tests
 
 on:
@@ -19,8 +18,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: "24"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -32,9 +31,8 @@ jobs:
         run: npm run build
 
       - name: Run CommerceQA regression tests
-        run: npx playwright test tests/cart.spec.ts tests/checkout.spec.ts
+        run: npx playwright test tests/cart.spec.ts tests/checkout.spec.ts tests/products-api.spec.ts
 
-      
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
