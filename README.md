@@ -1,78 +1,162 @@
 # CommerceQA Automation
 
-
 [![CommerceQA Playwright Tests](https://github.com/Cycalona-villani/commerceqa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Cycalona-villani/commerceqa-automation/actions/workflows/playwright.yml)
 
+**E-Commerce Quality Engineering | Playwright | TypeScript | React | REST API Testing | CI/CD**
 
-CommerceQA Automation is a hands-on quality engineering portfolio project focused on building and maintaining automated tests for e-commerce shopping cart and checkout workflows.
+CommerceQA Automation is a quality engineering portfolio project focused on developing and maintaining reliable automated testing for e-commerce shopping cart, checkout, payment simulation, and REST API workflows.
 
-The project combines a React e-commerce application with a Playwright automation framework to demonstrate functional testing, reusable test architecture, cross-browser validation, and regression testing.
+The project combines a React and TypeScript storefront with an Express backend and a Playwright automation framework to demonstrate functional testing, negative testing, cross-browser validation, reusable test architecture, and continuous integration.
 
-## Current Project Status
+## Project Highlights
 
-**Phase 1 — Shopping Cart Automation Complete**
+- **19 automated test scenarios**
+- **57 of 57 test executions passed locally**
+- Cross-browser UI testing with Chromium, Firefox, and WebKit
+- Reusable Page Object Model (POM)
+- REST API testing with Playwright
+- Simulated payment approval and rejection
+- Duplicate-order protection using idempotency keys
+- Automated regression testing with GitHub Actions
+- HTML test reports and CI artifacts
 
-The application currently supports:
+**Latest confirmed local regression execution:** 57 of 57 passed across 19 scenarios and three configured Playwright projects.
 
-- Product catalog with four products
-- Add to Cart functionality
-- Multiple products in the cart
-- Quantity updates
-- Product removal
-- Dynamic cart totals
-
-### Automated Test Coverage
-
-| Test ID | Scenario | Browsers |
-|---|---|---|
-| CART-001 | Add product to cart | Chromium, Firefox, WebKit |
-| CART-002 | Add multiple products | Chromium, Firefox, WebKit |
-| CART-003 | Update product quantity | Chromium, Firefox, WebKit |
-| CART-004 | Remove product from cart | Chromium, Firefox, WebKit |
-
-**Latest confirmed execution:** 12 of 12 automated tests passed in 4.2 seconds across Chromium, Firefox, and WebKit.
-
-**Test coverage:** CART-001, CART-002, CART-003, and CART-004.
+The API tests currently execute in each browser project, even though they do not require a browser. A dedicated API testing project is planned.
 
 ## Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| Playwright | Automated browser testing |
-| TypeScript | Type-safe automation |
-| React | E-commerce application |
-| Vite | Development and build tooling |
+| Playwright | UI and REST API automation |
+| TypeScript | Type-safe test development |
+| React | E-commerce storefront |
+| Vite | Frontend development and build tooling |
 | Node.js | JavaScript runtime |
-| GitHub | Version control |
+| Express | REST API backend |
+| GitHub Actions | Continuous integration |
+| Git & GitHub | Version control |
+| Playwright HTML Reporter | Test reporting and debugging |
 
-## Automation Framework
+## Application Features
 
-The project uses the **Page Object Model (POM)** to separate browser interactions from test scenarios.
+### Shopping Cart
+- Product catalog
+- Add products to cart
+- Multiple-product cart
+- Update quantities
+- Remove products
+- Dynamic cart totals
 
-The `CartPage` class provides reusable methods for:
+### Checkout
+- Customer information form
+- Required-field validation
+- Guest checkout simulation
+- Approved payment simulation
+- Declined payment simulation
+- Order confirmation
 
-- Navigating to the application
-- Adding products
-- Updating quantities
+### REST API
+- Health endpoint
+- Product retrieval
+- Order creation
+- Customer and cart validation
+- Product and quantity validation
+- Simulated payment processing
+- Idempotency-key handling for duplicate submissions
+
+## Automated Test Coverage
+
+### Shopping Cart Tests
+
+| Test ID | Scenario |
+|---|---|
+| CART-001 | Add product to cart |
+| CART-002 | Add multiple products |
+| CART-003 | Update product quantity |
+| CART-004 | Remove product from cart |
+
+### Checkout Tests
+
+| Test ID | Scenario |
+|---|---|
+| CHECK-001 | Successful checkout |
+| CHECK-002 | Declined payment |
+| CHECK-003 | Required-field validation |
+
+### Product API Tests
+
+| Test ID | Scenario |
+|---|---|
+| API-001 | Health endpoint returns HTTP 200 |
+| API-002 | Retrieve product catalog |
+| API-003 | Validate product data structure |
+| API-004 | Unknown endpoint returns HTTP 404 |
+
+### Order API Tests
+
+| Test ID | Scenario |
+|---|---|
+| ORDER-001 | Create a valid order |
+| ORDER-002 | Reject missing customer information |
+| ORDER-003 | Reject an empty shopping cart |
+| ORDER-004 | Reject invalid product quantity |
+| ORDER-005 | Reject nonexistent product |
+| ORDER-006 | Reject simulated declined payment |
+| ORDER-007 | Return the original order for a duplicate request |
+| ORDER-008 | Reject idempotency-key reuse with different order data |
+
+## Automation Framework Architecture
+
+CommerceQA uses the **Page Object Model (POM)** to separate application interactions from test scenarios.
+
+### CartPage
+
+Reusable methods for:
+- Navigating to the storefront
+- Adding products to the cart
+- Updating product quantities
 - Removing products
-- Validating cart counts
-- Validating cart totals
+- Validating cart counts and totals
 
-This architecture makes test scenarios easier to read, maintain, and expand.
+### CheckoutPage
+
+Reusable methods for:
+- Entering customer information
+- Selecting simulated payment outcomes
+- Submitting orders
+- Validating successful checkout
+- Validating declined payments
+
+This architecture reduces duplicated browser interactions and helps make automated tests easier to maintain.
 
 ## Project Structure
 
 ```text
 commerceqa-automation/
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
 ├── pages/
-│   └── CartPage.ts
+│   ├── CartPage.ts
+│   └── CheckoutPage.ts
+├── public/
+│   └── assets/
+│       └── commerceqa.svg
+├── server/
+│   ├── index.ts
+│   └── products.json
 ├── src/
+│   ├── components/
+│   │   └── Checkout.tsx
 │   ├── App.tsx
 │   ├── App.css
 │   └── index.css
 ├── tests/
 │   ├── cart.spec.ts
-│   └── example.spec.ts
+│   ├── checkout.spec.ts
+│   ├── products-api.spec.ts
+│   └── orders-api.spec.ts
 ├── playwright.config.ts
 ├── package.json
 └── README.md
@@ -82,9 +166,9 @@ commerceqa-automation/
 
 ### Prerequisites
 
-- Node.js
+- Node.js 24 or a compatible supported version
 - npm
-- Playwright-supported browsers
+- Git
 
 ### Installation
 
@@ -93,95 +177,175 @@ Clone the repository:
 ```bash
 git clone https://github.com/Cycalona-villani/commerceqa-automation.git
 cd commerceqa-automation
-npm install
+```
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Install Playwright browsers:
+
+```bash
 npx playwright install
 ```
 
-### Start the Application
+### Start the Storefront
 
 ```bash
 npm run dev
 ```
 
-The application runs locally at:
+Open:
 
-`http://localhost:5173/`
+http://localhost:5173/
 
-### Run Automated Tests
+### Start the REST API
 
-In a second terminal, run:
+```bash
+npm run api
+```
+
+API endpoints:
+
+- `GET /api/health`
+- `GET /api/products`
+- `POST /api/orders`
+
+API base URL: http://localhost:3001
+
+### Run All Automated Tests
+
+```bash
+npx playwright test tests/cart.spec.ts tests/checkout.spec.ts tests/products-api.spec.ts tests/orders-api.spec.ts
+```
+
+Playwright is configured to start the storefront and API automatically when running the tests.
+
+### Run Shopping Cart Tests
 
 ```bash
 npx playwright test tests/cart.spec.ts
 ```
 
-### View the Playwright Report
+### Run Checkout Tests
+
+```bash
+npx playwright test tests/checkout.spec.ts
+```
+
+### Run API Tests
+
+```bash
+npx playwright test tests/products-api.spec.ts tests/orders-api.spec.ts
+```
+
+### Run Chromium Tests
+
+```bash
+npx playwright test --project=chromium
+```
+
+### View HTML Test Report
 
 ```bash
 npx playwright show-report
 ```
 
-### Run Tests in a Specific Browser
+### Build the Application
 
 ```bash
-npx playwright test tests/cart.spec.ts --project=chromium
+npm run build
 ```
+
+## Continuous Integration
+
+The project uses **GitHub Actions** to execute automated regression testing on repository changes.
+
+The CI pipeline:
+
+1. Checks out the repository.
+2. Configures Node.js.
+3. Installs project dependencies.
+4. Installs Playwright browsers.
+5. Builds the React application.
+6. Starts the required application services through Playwright configuration.
+7. Executes automated UI and REST API tests.
+8. Uploads the Playwright HTML report as a workflow artifact.
+
+[View GitHub Actions](https://github.com/Cycalona-villani/commerceqa-automation/actions)
 
 ## Testing Strategy
 
-CommerceQA focuses on validating business-critical e-commerce functionality through automated tests.
+The project emphasizes risk-based testing of business-critical e-commerce functionality.
 
-Testing priorities include:
+Testing includes:
 
-- Functional correctness
-- Cart calculations
-- User input validation
-- Positive and negative scenarios
-- Regression coverage
-- Cross-browser compatibility
-- Reusable automation components
+- Positive functional scenarios
+- Negative and invalid-input scenarios
+- Cart calculations and quantity validation
+- Required checkout information
+- HTTP response validation
+- API response structure validation
+- Simulated payment failures
+- Duplicate-order request handling
+- Regression testing
+- Cross-browser UI validation
+
+### Duplicate-Order Protection
+
+The Order API includes an in-memory idempotency-key demonstration.
+
+A repeated request using the same key and payload returns the original order confirmation rather than creating a new order identifier. Reusing the same key with different order data produces HTTP 409 Conflict.
+
+This implementation is intended for testing and learning. It does not provide persistent storage or production-grade concurrency guarantees.
 
 ## Development Roadmap
 
-### Phase 1: Shopping Cart
+### Phase 1: Shopping Cart Automation
 - [x] Create React + TypeScript application
-- [x] Install and configure Playwright
 - [x] Implement product catalog
-- [x] Implement shopping cart functionality
-- [x] Create reusable CartPage object
-- [x] Automate adding products
-- [x] Automate multiple-product scenarios
-- [x] Implement quantity changes and product removal
-- [x] Add automated scenarios for quantity changes and removal
-- [x] Confirm all four scenarios pass across three browsers
+- [x] Implement cart and quantity management
+- [x] Configure Playwright
+- [x] Implement CartPage Page Object Model
+- [x] Automate four shopping cart scenarios
+- [x] Verify cross-browser execution
 
 ### Phase 2: Checkout Automation
 - [x] Implement checkout form
-- [x] Validate required customer information
-- [x] Automate successful checkout
-- [x] Test required-field validation
-- [x] Simulate payment acceptance and rejection
-- [x] Automate approved and declined payment scenarios
-- [x] Confirm 21 cart and checkout browser tests pass
+- [x] Add customer information validation
+- [x] Simulate approved and declined payments
+- [x] Implement CheckoutPage Page Object Model
+- [x] Automate successful and declined checkout
+- [x] Automate required-field validation
 
-### Phase 3: Advanced Test Framework
-- [x] Implement reusable CartPage and CheckoutPage objects
+### Phase 3: Advanced Automation Framework
+- [x] Implement REST API with Express
+- [x] Add product and health API tests
+- [x] Add order creation tests
+- [x] Add customer and product validation tests
+- [x] Add negative API test scenarios
+- [x] Add simulated declined payment testing
+- [x] Implement sequential idempotency-key handling
+- [x] Add duplicate-order regression tests
 - [x] Configure GitHub Actions CI
-- [x] Automatically run Playwright regression tests
-- [x] Build React application in CI
-- [x] Publish automated test reports as workflow artifacts
-- [ ] Expand Page Object Model
+- [x] Configure automatic application startup
+- [x] Generate Playwright reports
+- [x] Verify 57 local test executions
+- [ ] Create dedicated Playwright API test project
 - [ ] Introduce reusable fixtures
-- [ ] Add API tests
-- [ ] Implement test data management
-- [ ] Add negative and boundary testing
-- [ ] Document test execution and defects
+- [ ] Implement reusable test data factories
+- [ ] Add additional boundary-value tests
+- [ ] Strengthen order processing and concurrency testing
 
-### Phase 4: Professional QA Practices
-- [ ] Build a requirements traceability matrix
-- [ ] Document a simulated legacy-to-Playwright migration
-- [ ] Demonstrate AI-assisted test development
-- [ ] Add test evidence and screenshots
+### Phase 4: Professional QA Engineering Practices
+- [ ] Document formal test strategy
+- [ ] Create requirements traceability matrix
+- [ ] Document defects and reproduction steps
+- [ ] Demonstrate a simulated legacy-to-Playwright migration
+- [ ] Document responsible AI-assisted test development
+- [ ] Add test execution screenshots and reports
 - [ ] Publish a portfolio case study
 
 ## Author
