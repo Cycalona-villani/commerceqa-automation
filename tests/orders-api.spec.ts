@@ -1,22 +1,16 @@
 
 import { test, expect } from '@playwright/test'
+import { createCustomer } from '../test-data/customers'
+import { createOrder } from '../test-data/orders'
 
 const API_URL = 'http://127.0.0.1:3001'
 
 test.describe('CommerceQA Order API', () => {
 
+
   test('ORDER-001: Create a valid order', async ({ request }) => {
     const response = await request.post(`${API_URL}/api/orders`, {
-      data: {
-        customer: {
-          name: 'Jane Smith',
-          email: 'jane@example.com',
-          address: '123 Test Street'
-        },
-        items: [
-          { productId: 1, quantity: 1 }
-        ]
-      }
+      data: createOrder()
     })
 
     expect(response.status()).toBe(201)
@@ -27,6 +21,7 @@ test.describe('CommerceQA Order API', () => {
     expect(order.orderId).toMatch(/^ORDER-/)
     expect(order.message).toBe('Order created successfully')
   })
+
 
   test('ORDER-002: Reject missing customer information', async ({ request }) => {
     const response = await request.post(`${API_URL}/api/orders`, {
@@ -66,18 +61,12 @@ test.describe('CommerceQA Order API', () => {
 
 })
 
+
 test('ORDER-004: Reject invalid product quantity', async ({ request }) => {
   const response = await request.post(`${API_URL}/api/orders`, {
-    data: {
-      customer: {
-        name: 'Jane Smith',
-        email: 'jane@example.com',
-        address: '123 Test Street'
-      },
-      items: [
-        { productId: 1, quantity: 0 }
-      ]
-    }
+    data: createOrder({
+      items: [{ productId: 1, quantity: 0 }]
+    })
   })
 
   expect(response.status()).toBe(400)
@@ -88,18 +77,13 @@ test('ORDER-004: Reject invalid product quantity', async ({ request }) => {
 })
 
 
+
+
 test('ORDER-005: Reject nonexistent product', async ({ request }) => {
   const response = await request.post(`${API_URL}/api/orders`, {
-    data: {
-      customer: {
-        name: 'Jane Smith',
-        email: 'jane@example.com',
-        address: '123 Test Street'
-      },
-      items: [
-        { productId: 9999, quantity: 1 }
-      ]
-    }
+    data: createOrder({
+      items: [{ productId: 9999, quantity: 1 }]
+    })
   })
 
   expect(response.status()).toBe(400)
@@ -109,19 +93,13 @@ test('ORDER-005: Reject nonexistent product', async ({ request }) => {
   })
 })
 
+
+
 test('ORDER-006: Reject declined payment', async ({ request }) => {
   const response = await request.post(`${API_URL}/api/orders`, {
-    data: {
-      customer: {
-        name: 'Jane Smith',
-        email: 'jane@example.com',
-        address: '123 Test Street'
-      },
-      items: [
-        { productId: 1, quantity: 1 }
-      ],
+    data: createOrder({
       paymentResult: 'declined'
-    }
+    })
   })
 
   expect(response.status()).toBe(402)

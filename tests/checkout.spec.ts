@@ -1,5 +1,6 @@
 
 import { test, expect } from '../fixtures/test'
+import { validCustomer } from '../test-data/customers'
 
 test.describe('Checkout Tests', () => {
   test.beforeEach(async ({ cartPage }) => {
@@ -12,9 +13,9 @@ test.describe('Checkout Tests', () => {
     checkoutPage
   }) => {
     await checkoutPage.enterCustomerInformation(
-      'Jane Smith',
-      'jane@example.com',
-      '123 Test Street'
+      validCustomer.name,
+      validCustomer.email,
+      validCustomer.address
     )
 
     await checkoutPage.selectPaymentResult('approved')
