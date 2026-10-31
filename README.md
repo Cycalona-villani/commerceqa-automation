@@ -14,7 +14,7 @@ The project combines a React and TypeScript storefront with a separate Express d
 - **33 of 33 test executions passed locally and in GitHub Actions**
 - Cross-browser UI testing with Chromium, Firefox, and WebKit
 - Reusable Page Object Model (POM)
-- REST API testing with Playwright
+- REST AP◊ testing with Playwright
 - Simulated payment approval and rejection
 - Duplicate-order protection using idempotency keys
 - Automated regression testing with GitHub Actions
