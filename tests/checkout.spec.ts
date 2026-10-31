@@ -1,21 +1,16 @@
 
-import { test, expect } from '@playwright/test'
-import { CartPage } from '../pages/CartPage'
-import { CheckoutPage } from '../pages/CheckoutPage'
+import { test, expect } from '../fixtures/test'
 
 test.describe('Checkout Tests', () => {
-  let cartPage: CartPage
-  let checkoutPage: CheckoutPage
-
-  test.beforeEach(async ({ page }) => {
-    cartPage = new CartPage(page)
-    checkoutPage = new CheckoutPage(page)
-
+  test.beforeEach(async ({ cartPage }) => {
     await cartPage.goto()
     await cartPage.addProduct('Wireless Headphones')
   })
 
-  test('CHECK-001: Successful checkout', async () => {
+  test('CHECK-001: Successful checkout', async ({
+    cartPage,
+    checkoutPage
+  }) => {
     await checkoutPage.enterCustomerInformation(
       'Jane Smith',
       'jane@example.com',
@@ -30,7 +25,10 @@ test.describe('Checkout Tests', () => {
     await cartPage.expectCartTotal(0)
   })
 
-  test('CHECK-002: Declined payment', async () => {
+  test('CHECK-002: Declined payment', async ({
+    cartPage,
+    checkoutPage
+  }) => {
     await checkoutPage.enterCustomerInformation(
       'Jane Smith',
       'jane@example.com',
@@ -45,7 +43,11 @@ test.describe('Checkout Tests', () => {
     await cartPage.expectCartTotal(79.99)
   })
 
-  test('CHECK-003: Required field validation', async ({ page }) => {
+  test('CHECK-003: Required field validation', async ({
+    cartPage,
+    checkoutPage,
+    page
+  }) => {
     await checkoutPage.placeOrder()
 
     await expect(
