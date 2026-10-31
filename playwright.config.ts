@@ -33,21 +33,28 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+  
+projects: [
+  {
+    name: 'chromium',
+    testMatch: /^(?!.*-api\.spec\.ts$).*\.spec\.ts$/,
+    use: { ...devices['Desktop Chrome'] },
+  },
+  {
+    name: 'firefox',
+    testMatch: /^(?!.*-api\.spec\.ts$).*\.spec\.ts$/,
+    use: { ...devices['Desktop Firefox'] },
+  },
+  {
+    name: 'webkit',
+    testMatch: /^(?!.*-api\.spec\.ts$).*\.spec\.ts$/,
+    use: { ...devices['Desktop Safari'] },
+  },
+  {
+    name: 'api',
+    testMatch: /.*-api\.spec\.ts$/,
+  },
+],
 
     /* Test against mobile viewports. */
     // {
@@ -68,7 +75,6 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
 
   webServer: [
     {
